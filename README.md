@@ -1,2 +1,2 @@
 # mars-rover
-Ruby Gem to simulate Mars rover robots
+Ruby command-line tool to simulate Mars rover robots
