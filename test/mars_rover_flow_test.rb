@@ -1,8 +1,25 @@
 require "test_helper"
-require "mars_rover"
+require_relative "../mars_rover"
 
-class MarsRoverTest < Minitest::Test
-  def test_simulate_1
+class MarsRoverFlowTest < Minitest::Test
+  def test_help_with_no_args
+    options = {}
+
+    assert_raises SystemExit do
+      CLI.new(options).call
+    end
+  end
+
+  def test_exception_system_exit
+    # File must exists - see lib/file_reader.rb FileReader class
+    options = {file: "a_file_that_doesnt_exist.txt"}
+
+    assert_raises SystemExit do
+      CLI.new(options).call
+    end
+  end
+
+  def test_output_1
     # Example input
     inputs = [
       "4 8\n",
@@ -15,11 +32,11 @@ class MarsRoverTest < Minitest::Test
     # Example output
     expected_output = "(4, 4, E)\n(0, 4, W) LOST\n"
     assert_output(expected_output) do
-      MarsRover.new(file.path).simulate
+      CLI.new({file: file.path}).call
     end
   end
 
-  def test_simulate_2
+  def test_output_2
     # Second example input
     inputs = [
       "4 8\n",
@@ -32,11 +49,11 @@ class MarsRoverTest < Minitest::Test
     # Second example output
     expected_output = "(2, 3, W)\n(1, 0, S) LOST\n"
     assert_output(expected_output) do
-      MarsRover.new(file.path).simulate
+      CLI.new({file: file.path}).call
     end
   end
 
-  def test_simulate_3
+  def test_output_3
     # 4 robots: 3 in range, 1 lost
     # Robot 1 (random): start = (0, 0, E), end = (2, 4, N) movement = FLFRFFLFFLFRF
     # Robot 2 (straight up): start = (2, 2, E), end = (2, 8, N), movement = LFFFFFF
@@ -55,7 +72,7 @@ class MarsRoverTest < Minitest::Test
 
     expected_output = "(2, 4, N)\n(2, 8, N)\n(4, 3, N)\n(0, 1, W) LOST\n"
     assert_output(expected_output) do
-      MarsRover.new(file.path).simulate
+      CLI.new({file: file.path}).call
     end
   end
 
