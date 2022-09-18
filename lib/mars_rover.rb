@@ -7,10 +7,9 @@ require_relative "input_parsers/world"
 class MarsRover
   attr_reader :world_input, :robot_inputs
 
-  def initialize(file)
-    input_lines = FileReader.new(file).lines
-    @world_input = InputParsers::World.new(input_lines.shift)
-    @robot_inputs = input_lines.map { |line| InputParsers::Robot.new(line) }
+  def initialize(world_input:, robot_inputs:)
+    @world_input = world_input
+    @robot_inputs = robot_inputs
   end
 
   def simulate

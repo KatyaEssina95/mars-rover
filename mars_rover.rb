@@ -11,7 +11,10 @@ class CLI
 
   def call
     begin
-      MarsRover.new(file).simulate
+      input_lines = FileReader.new(file).lines
+      world_input = InputParsers::World.new(input_lines.shift)
+      robot_inputs = input_lines.map { |line| InputParsers::Robot.new(line) }
+      MarsRover.new(world_input:, robot_inputs:).simulate
     rescue => e
       abort e.message
     end

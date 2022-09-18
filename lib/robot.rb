@@ -8,7 +8,7 @@ class Robot
     "W": [-1, 0]
   }
 
-  attr_accessor :position, :world, :lost
+  attr_reader :position, :world, :lost
 
   def initialize(x, y, orientation, world)
     @position = Position.new(x, y, orientation)
