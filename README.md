@@ -26,5 +26,6 @@ If the above file is called `example.txt`, running `ruby mars_rover.rb -f exampl
 ```
 
 ## Improvements
+- Add test cases for testing full application
 - This project could be extended to use an interactive command line to capture user input. This I think would make the user experience nicer. I would use the [highline gem](https://github.com/JEG2/highline) to interact with the user.
 - It would be nice to package & publish this as a ruby gem to make integration with other Ruby projects easier.
