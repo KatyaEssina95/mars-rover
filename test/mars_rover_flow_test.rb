@@ -19,6 +19,14 @@ class MarsRoverFlowTest < Minitest::Test
     end
   end
 
+  def test_no_robots
+    file = create_temp_file("4 8") # World dimensions only
+
+    assert_output("") do
+      CLI.new({file: file.path}).call
+    end
+  end
+
   def test_output_1
     # Example input
     inputs = [
